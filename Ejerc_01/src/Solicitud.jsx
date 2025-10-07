@@ -16,14 +16,25 @@ const Solicitud = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  const myForm = e.target;
+  const formData = new FormData(myForm);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+    .then(() => window.alert("/thank-you/"))
+    .catch(error => alert(error));
     console.log('Formulario enviado:', formData);
   };
 
   return (
     <div className="container mt-5">
       <h2 className="mb-4 text-success">Formulario de Solicitud</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true">
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">Nombre</label>
           <input
