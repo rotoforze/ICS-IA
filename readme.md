@@ -6,3 +6,6 @@ Este respositorio es para subir los ejercicios de la asignatura para 2ºDAW
 
 # Ejercicio 5.1
 [Página ejercicio 5.1](https://majestic-cocada-87f8ed.netlify.app)
+
+# Ejercicio 5.2
+[Página ejercicio 5.2](https://thunderous-daifuku-aaee1f.netlify.app/)
