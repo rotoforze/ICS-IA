@@ -9,3 +9,7 @@
 4. Los fijados deberían estar los primeros, por ende habría que hacer un .sort para ponerlos primero.
 
 5. El array de los artículos está dentro del propio componente.
+
+## ¿Por qué es fundamental el uso de key para el rendimiento y la identidad del elemento en React?
+
+Porque proporciona una identidad única a cada elemento, siendo que si se actualiza alguno, solo refresacará ese, el resto no los tocará, haciendo que sea más rápido.

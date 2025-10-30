@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { SearchBar } from './componentes/SearchBar';
+import { ArticleList } from './componentes/ArticleList';
 
 // Simula una llamada a una API
 const allArticles = [
@@ -10,30 +12,13 @@ const allArticles = [
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   return (
-    <div>
-      <h1>Feed de Noticias</h1>
-      <input
-        type="text"
-        placeholder="Buscar artículo..."
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">Feed de Noticias</h1>
+      <SearchBar setSearchTerm={setSearchTerm} />
       <hr />
-     
-      {allArticles.map((article, index) => {
-        if (article.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return (
-            <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
-              <h2>{article.title}</h2>
-              <p>Categoría: {article.category}</p>
-             
-              {article.pinned && <strong>(Fijado)</strong>}
-            </div>
-          );
-        }
-        return null;
-      })}
+      <ArticleList allArticles={allArticles} searchTerm={searchTerm} />
     </div>
   );
 }
