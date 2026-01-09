@@ -18,7 +18,7 @@ He creado un nuevo componente Contador, lo he puesto dentro de ContadorPadre, ah
 
 1 -> Solo se ejectua el console.log de Contador.
 
-2 y 3 -> [Captura](./public/despuésDelCambio.png.png)
+2 y 3 -> [Captura](./public/despuesDelCambio.png)
 
 4 -> Ahora aunque haga muchos clicks no se ve afectado el rendimiento. 1 mensaje por click.
 
