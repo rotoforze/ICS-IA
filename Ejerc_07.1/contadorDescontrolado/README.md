@@ -1,16 +1,21 @@
-# React + Vite
+# Preguntas
+## 1. Demuestra con `console.log` que los 6 niveles se ejecutan en cada clic.
+ -> Se actualizan debido al uso de useEffect().
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 2. Abre React DevTools → Profiler → graba 5 clicks.
+## 3. Muestra capturas de pantalla mostrando los tiempos de renderizado en cada clic.
+[Captura](./public/antesDelCambio.png)
+## 4. ¿Se ve lento el navegador? ¿Cuántas funciones (`console.log`) se ejecutan en cada clic?
+ -> Sí hago muchos clicks a la vez, sí. 1.011 mensajes.
 
-Currently, two official plugins are available:
+## 5. ¿Son todos los renderizados necesarios? ¿Por qué?
+ -> No son necesarios porque al actualizar el contador no debería actualizarse las tarjetas de usuario.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 6. **Modificar el programa para evitar los renderizados innecesarios.**
+ -> He creado un nuevo componente Contador, lo he puesto dentro de ContadorPadre, ahora solo se actualiza ese componente, en vez del ContadorPadre y forzar la lista de usuarios a renderizarse de nuevo.
 
-## React Compiler
-
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 7. Vuelve a hacer los apartados 1 a 5.
+    1 -> Solo se ejectua el console.log de Contador.
+    2 y 3 -> [Captura](./public/despuésDelCambio.png.png)
+    4 -> Ahora aunque haga muchos clicks no se ve afectado el rendimiento. 1 mensaje por click.
+    5 -> Ahora sí, son necesarios para poder mostrar el número en la interfaz. 
