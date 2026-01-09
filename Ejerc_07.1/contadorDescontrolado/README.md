@@ -15,7 +15,11 @@
  -> He creado un nuevo componente Contador, lo he puesto dentro de ContadorPadre, ahora solo se actualiza ese componente, en vez del ContadorPadre y forzar la lista de usuarios a renderizarse de nuevo.
 
 ## 7. Vuelve a hacer los apartados 1 a 5.
-    1 -> Solo se ejectua el console.log de Contador.
-    2 y 3 -> [Captura](./public/despuésDelCambio.png.png)
-    4 -> Ahora aunque haga muchos clicks no se ve afectado el rendimiento. 1 mensaje por click.
-    5 -> Ahora sí, son necesarios para poder mostrar el número en la interfaz. 
+
+1 -> Solo se ejectua el console.log de Contador.
+
+2 y 3 -> [Captura](./public/despuésDelCambio.png.png)
+
+4 -> Ahora aunque haga muchos clicks no se ve afectado el rendimiento. 1 mensaje por click.
+
+5 -> Ahora sí, son necesarios para poder mostrar el número en la interfaz. 
