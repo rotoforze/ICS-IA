@@ -1,0 +1,172 @@
+/* =====================
+   RESET BÁSICO
+===================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* =====================
+   HEADER / NAVBAR
+===================== */
+header {
+  background-color: #1e293b;
+  padding: 1rem 2rem;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+header a {
+  color: #cbd5f5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header a.active {
+  color: #ffffff;
+  border-bottom: 2px solid #60a5fa;
+}
+
+/* =====================
+   LAYOUT GENERAL
+===================== */
+main {
+  padding: 2rem;
+}
+
+/* =====================
+   DASHBOARD LAYOUT
+===================== */
+aside {
+  background-color: #0f172a;
+  min-height: calc(100vh - 70px);
+  padding: 1.5rem 1rem;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside li + li {
+  margin-top: 1rem;
+}
+
+aside a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+aside a.active {
+  color: #94a3b8;
+}
+
+/* =====================
+   CONTENIDO
+===================== */
+section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+/* =====================
+   TÍTULOS
+===================== */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* =====================
+   LISTA DE TAREAS
+===================== */
+ul {
+  margin-top: 1rem;
+}
+
+li {
+  padding: 0.75rem 1rem;
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+li a {
+  color: #1e40af;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+/* =====================
+   FORMULARIOS
+===================== */
+form {
+  max-width: 400px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* =====================
+   BOTONES
+===================== */
+button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* =====================
+   UTILIDADES
+===================== */
+p {
+  margin-bottom: 1rem;
+}
