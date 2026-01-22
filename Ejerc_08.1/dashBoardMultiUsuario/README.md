@@ -1,16 +1,27 @@
-# React + Vite
+## Justificación de Arquitectura
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Separar AuthContext y TasksContext sigue el principio de separación de responsabilidades. Los datos (usuarios, tareas) viven fuera de los contextos y estos solo gestionan estado y reglas de negocio.
 
-Currently, two official plugins are available:
+Un único GlobalContext provocaría re-renders masivos ante cualquier cambio irrelevante.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ejemplo: UserInfo no se re-renderiza cuando cambia una tarea, y la lista de tareas no se vuelve a calcular al cambiar de usuario invitado.
 
-## React Compiler
+## Depuración y Optimización
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Al cambiar de usuario:
 
-## Expanding the ESLint configuration
+Se actualiza AuthContext.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Solo los componentes que consumen autenticación se re-renderizan.
+
+TaskItem se mantiene estable gracias a React.memo, salvo cuando cambian permisos reales.
+
+Claves:
+
+Datos normalizados (authorId en lugar de nombre)
+
+Contextos pequeños y específicos
+
+React.memo para aislar renders
+
+Este enfoque escala correctamente cuando los datos provienen de una API real.
