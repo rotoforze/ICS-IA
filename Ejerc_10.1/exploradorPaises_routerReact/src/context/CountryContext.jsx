@@ -15,15 +15,19 @@ export function CountryProvider({ children }) {
     }
 
     const getPaisPorNombre = (nombre) => {
-        listaPaises.map((p) => {
-            if (nombre == p.name.common) return p;
-        })
+        if (!listaPaises) return undefined;
+        return listaPaises.find(p => p.name.common == nombre);
+    }
+
+    const getPaisPorDiminutivo = (diminutivo) => {
+        if (!listaPaises) return undefined;
+        return listaPaises.find(p => p.cca3 == diminutivo);
     }
 
     return (
         <CountryContext.Provider
             value={{
-                paisActual, changePais, listaPaises, nuevaListaPaises, getPaisPorNombre
+                paisActual, changePais, listaPaises, nuevaListaPaises, getPaisPorNombre, getPaisPorDiminutivo
             }} >
             {children}
         </CountryContext.Provider>

@@ -1,9 +1,9 @@
-import { Outlet, useLoaderData, useParams } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import CountryList from "./CountryList";
 import { useCountries } from "../context/CountryContext";
 function CountryContainer() {
     const paises = useLoaderData();
-    const { paisActual, changePais, listaPaises, nuevaListaPaises } = useCountries();
+    const { listaPaises, nuevaListaPaises } = useCountries();
     
     if (paises != listaPaises) nuevaListaPaises(paises);
 

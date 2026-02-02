@@ -4,6 +4,7 @@ import CountryInformation from './components/CountryInformation';
 import { loader as countryLoader } from './components/CountryContainer'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CountryProvider } from './context/CountryContext';
+import ErrorPage from './components/ErrorPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -11,10 +12,11 @@ function App() {
       path: '/',
       element: <CountryContainer />,
       loader: countryLoader,
+      errorElement: <ErrorPage />,
       children: [
-        {path: '/:countryName', element: <CountryInformation /> }
+        {path: '/:nombre', element: <CountryInformation /> }
       ]
-    }
+    },
   ])
   return (
     <CountryProvider>

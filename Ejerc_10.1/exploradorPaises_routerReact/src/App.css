@@ -31,6 +31,7 @@ aside {
 aside .btnListaPaises {
   display: flex;
   flex-direction: row;
+  height: 100px !important;
 }
 .activo {
   color: white
@@ -38,7 +39,22 @@ aside .btnListaPaises {
 .activo:hover {
   color: inherit
 }
-a {
+.section {
+  width: fit-content;
+  height: fit-content !important;
+}
+.info-pais, .lista-paises {
+  border: white 1px solid;
+}
+.info-pais {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.lista-paises {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.btn-navlink {
   background-color: grey;
   border-radius: 10px;
   align-items: center;
