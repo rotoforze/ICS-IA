@@ -1,0 +1,70 @@
+.btnListaPaises {
+  display: flex;
+  height: 50px;
+  width: 30dvw;
+  background-color: grey;
+  justify-content: left;
+  border: 2px solid #f1f1f1f1;
+  border-radius: 10px;
+  margin: 10px;
+  overflow: hidden;
+}
+.btnListaPaises img {
+  width: 10dvw;
+  min-width: 10dvw;
+  max-width: 10dvw;
+}
+main {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+main div {
+  display: flex;
+  flex-direction: column;
+}
+aside {
+  display: flex;
+  flex-direction: column;
+  width: 45dvw;
+}
+aside .btnListaPaises {
+  display: flex;
+  flex-direction: row;
+}
+.activo {
+  color: white
+}
+.activo:hover {
+  color: inherit
+}
+a {
+  background-color: grey;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  justify-content: center;
+  color: navy;
+}
+a:hover {
+   color: green;
+}
+main div:last-child aside:first-child {
+  flex-direction: column;
+}
+main div:last-child aside:first-child div {
+  flex-direction: column;
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+main div:last-child aside:first-child div div {
+  flex-direction: row;
+  min-height: fit-content !important;
+}
+main div:last-child {
+  display: flex;
+  flex-direction: row;
+}
