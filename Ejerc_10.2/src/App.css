@@ -1,0 +1,112 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  border-bottom: 1px solid;
+  padding: 10px 0px;
+}
+
+li a {
+  text-decoration: none;
+  padding: 0px 25px;
+}
+
+li a:hover {
+  color: blue;
+}
+
+.activo {
+  color: #1f1f1f;
+  text-decoration: underline;
+}
+
+main {
+  width: 80%;
+  margin: 0px auto;
+}
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0px auto;
+  padding: 25px;
+}
+
+legend {
+  text-align: center;
+}
+
+fieldset div {
+  padding: 10px 0px;
+}
+
+fieldset label {
+  padding-right: 20px;
+}
+
+fieldset input[type="text"] {
+  border: none;
+  border-bottom: #1f1f1f 1px solid;
+  width: 100%;
+  padding: 5px;
+  transition: all 2000ms;
+}
+
+fieldset input[type="text"]:focus {
+  transition: all 1000ms;
+  border: #1f1f1f 1px solid;
+  box-shadow: 1px 2px;
+  border-radius: 10px;
+  outline-style: none;
+}
+
+.message {
+  display: block;
+  text-align: center;
+  border-radius: 10px;
+  width: 20%;
+  justify-self: center;
+  padding: 10px;
+  transition: all 2500ms;
+  transform: translateY(-200px);
+  position: fixed;
+
+}
+
+.message.info,
+.message.error {
+  transform: translateY(10px);
+  display: block;
+  transition: all 2500ms;
+}
+
+.message.info {
+  background-color: #a2c4f1;
+  border: #76a7e8 2px solid;
+}
+
+.message.error {
+  background-color: #f49797;
+  border: #e26060 2px solid;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+option:checked {
+  color: red;
+}
+option {
+  border-bottom: 1px #1f1f1f solid;
+}
