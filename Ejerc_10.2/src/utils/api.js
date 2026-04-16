@@ -203,8 +203,8 @@ export function getTaskList() {
 }
 
 export function whichState(state) {
-    if (typeof state == 'number') {
-        switch (state) {
+    if (typeof state == typeof 0 || state == 0) {
+        switch (state || 0) {
             case States.NOT_STARTED:
                 return 'Sin empezar';
             case States.STARTED:
@@ -215,7 +215,7 @@ export function whichState(state) {
                 return 'Terminado';
         }
     } else {
-        return `Expected typeof number got: ${typeof state}`;
+        return `Expected ${typeof 0} got: ${typeof state}`;
     }
 }
 

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllStates } from '../utils/api'
 import { useProjects } from '../context/ProjectContext';
+import { useNavigate, Form, useActionData } from 'react-router-dom';
 
 class TypeOfMessages {
   static ERROR_MESSAGE = 'error';
   static INFO_MESSAGE = 'info';
+  static TIME_MESSAGE = 2500;
 
   static existTypeMessage(typeMessage) {
     for (const att in TypeOfMessages) {
@@ -15,22 +17,24 @@ class TypeOfMessages {
 }
 
 export const NewProjectPage = () => {
+  const response = useActionData();
   const { addProject } = useProjects();
-
+  const navigate = useNavigate();
   const [mensaje, setMensaje] = useState('');
   const [mensajeClass, setMensajeClass] = useState('');
+
   const handleMensaje = (mensaje, typeOfMenssage = TypeOfMessages.INFO_MESSAGE) => {
     if (TypeOfMessages.existTypeMessage(typeOfMenssage)) {
       setMensaje(mensaje);
       setMensajeClass(typeOfMenssage);
       let idInterval = setInterval(() => {
         setMensajeClass('');
-      }, 5000)
+        clearInterval(idInterval);
+      }, TypeOfMessages.TIME_MESSAGE)
     }
   }
 
   let states = [];
-
   getAllStates().forEach((val, key) => {
     states.push((
       <option key={key} value={key}>
@@ -39,64 +43,73 @@ export const NewProjectPage = () => {
     ));
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
 
-    const newProject = {
-      title: e.target.titulo.value,
-      description: e.target.descripcion.value,
-      state: e.target.state.value
-    };
-    e.target.enviar.disabled = true;
-    let id = setInterval(() => {
-      e.target.enviar.disabled = false;
-    }, 4000)
+    if (response) {
 
-    try {
+      try {
 
-      for (const key in newProject) {
-        const element = newProject[key];
-
-        if (element == undefined || element == '') {
-          throw new Error(`${key} está vacío o es inválido`)
+        if (response.errorMenssage) {
+          throw new Error(response.errorMenssage);
         }
+
+        const addedProject = addProject(response?.object || response);
+        if (addedProject) {
+          handleMensaje("Se ha añadido correctamente el proyecto. Se le redireccionará en 3s.");
+          let id = setInterval(() => {
+            navigate(`/projects/${addedProject}`);
+            clearInterval(id);
+          }, TypeOfMessages.TIME_MESSAGE)
+        } else handleMensaje("Ha ocurrido un error intentando añadir el proyecto.", 'error')
+
+      } catch (error) {
+        console.error(error);
+        handleMensaje(error.message, 'error');
       }
 
-      if (addProject(newProject)) {
-        handleMensaje("Se ha añadido correctamente el proyecto.");
-        e.target.reset;
-      } else handleMensaje("Ha ocurrido un error intentando añadir el proyecto.", 'error')
-
-    } catch (error) {
-      console.error(error)
-      handleMensaje(error.message, 'error')
-
     }
-  }
+  }, [response])
+
 
   return (
     <>
       <div className={mensajeClass + ' message'}>{mensaje}</div>
       <fieldset>
         <legend>Añadir nuevo proyecto</legend>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <Form action={action} method='POST'>
           <div>
-            <label htmlFor="titulo">Titulo</label>
-            <input type="text" name="titulo" id="titulo" />
+            <label htmlFor="title">Titulo</label>
+            <input type="text" name="title" id="title" disabled={mensajeClass} />
           </div>
           <div>
-            <label htmlFor="descripcion">Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" />
+            <label htmlFor="description">Descripción</label>
+            <input type="text" name="description" id="description" disabled={mensajeClass} />
           </div>
           <div>
             <label htmlFor="state">Estado incial</label>
             <select name="state" id="state">
+              <option value={-1}>
+                ------------------
+              </option>
               {states}
             </select>
           </div>
-          <input type="submit" name='enviar' id='enviar' value="Añadir proyecto" />
-        </form>
+          <input type="submit" name='enviar' id='enviar' value="Añadir proyecto" disabled={mensajeClass} />
+        </Form>
       </fieldset>
     </>
   )
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData);
+  postData.state = Number.parseInt(postData.state);
+  if (postData?.title.length < 5 || !postData?.title) {
+    return { errorMenssage: `El titulo "${postData?.title}" está vacío o no tiene una longitud de al menos 5 carácteres (${postData?.title.length}).`, object: postData };
+  } else if (!postData?.description) {
+    return { errorMenssage: `La descripción "${postData?.description}" está vacía.`, object: postData };
+  } else if (!(postData?.state > -1 && postData?.state < 4) || postData?.state == -1) {
+    return { errorMenssage: `El Estado inicial no es válido (${postData?.state}) o está vacía.`, object: postData };
+  } else return postData;
 }

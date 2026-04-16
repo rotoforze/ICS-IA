@@ -2,7 +2,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-ul {
+header ul {
   list-style: none;
   display: flex;
   width: 100%;
@@ -11,12 +11,12 @@ ul {
   padding: 10px 0px;
 }
 
-li a {
+header li a {
   text-decoration: none;
   padding: 0px 25px;
 }
 
-li a:hover {
+header li a:hover {
   color: blue;
 }
 
@@ -51,11 +51,14 @@ fieldset label {
   padding-right: 20px;
 }
 
+fieldset input[type="submit"], fieldset input[type="text"] {
+  width: 100%;
+  padding: 5px;
+}
+
 fieldset input[type="text"] {
   border: none;
   border-bottom: #1f1f1f 1px solid;
-  width: 100%;
-  padding: 5px;
   transition: all 2000ms;
 }
 
@@ -107,6 +110,7 @@ select {
 option:checked {
   color: red;
 }
+
 option {
   border-bottom: 1px #1f1f1f solid;
 }

@@ -2,7 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from './routes/ErrorPage';
 import { HomePage } from './routes/HomePage';
 import { ProjectsPage } from './routes/ProjectsPage';
-import { NewProjectPage } from './routes/NewProjectPage';
+import { NewProjectPage, action as NewProyectAction } from './routes/NewProjectPage';
+import { ProjectDetailsPage } from './routes/ProjectDetailsPage';
+import { NewTaskPage } from './routes/NewTaskPage';
 import './App.css';
 import { ProjectProvider, loader } from './context/ProjectContext';
 import { RootLayout } from './routes/RootLayout';
@@ -17,7 +19,9 @@ function App() {
       children: [
         { path: '/', element: <HomePage /> },
         { path: '/projects', element: <ProjectsPage /> },
-        { path: '/projects/new', element: <NewProjectPage /> }
+        { path: '/projects/new', element: <NewProjectPage />, action: NewProyectAction },
+        { path: '/projects/:projectid', element: <ProjectDetailsPage /> },
+        { path: '/projects/:projectid/newTask', element: <NewTaskPage /> }
       ]
     },
   ])
