@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { getProjectList, getTaskList } from "../utils/api";
+import { canUpgradeState, getProjectList, getTaskList } from "../utils/api";
 
 const ProjectContext = createContext();
 export function ProjectProvider({ children }) {
@@ -124,9 +124,37 @@ export function ProjectProvider({ children }) {
         return listaTasks.filter(task => task.projectId == projectId);
     }
 
+    const goToNextState = (id, isProject = true) => {
+        if (typeof isProject != 'boolean') return -1;
+
+        if (isProject) {
+            // edita el estado del project cuyo id sea id
+            const updatedProjects = listaProjects.map(project => {
+                if (project.id === id) {
+                    if (canUpgradeState(project.state)) {
+                        return { ...project, state: project.state + 1 };
+                    } else return -1
+                }
+                return project;
+            });
+            setListaProjects(updatedProjects);
+        } else {
+            // edita el estado de la task cuyo id sea id
+            const updatedTasks = listaTasks.map(task => {
+                if (task.id === id) {
+                    if (canUpgradeState(task.state)) {
+                        return { ...task, state: task.state + 1 };
+                    } else return -1
+                }
+                return task;
+            });
+            setListaTasks(updatedTasks);
+        }
+    }
+
     return (
         <ProjectContext.Provider
-            value={{ listaProjects, setListaProjects, addProject, getProjectFromID, removeProjectFromID, listaTasks, setListaTasks, getNextTaskID, addTask, getTasksFromProjectId, removeTaskFromID }} >
+            value={{ listaProjects, setListaProjects, addProject, getProjectFromID, removeProjectFromID, listaTasks, setListaTasks, getNextTaskID, addTask, getTasksFromProjectId, removeTaskFromID, goToNextState }} >
             {children}
         </ProjectContext.Provider>
     );

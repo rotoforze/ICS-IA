@@ -213,6 +213,8 @@ export function whichState(state) {
                 return 'Pausado';
             case States.FINISHED:
                 return 'Terminado';
+            default:
+                return undefined;
         }
     } else {
         return `Expected ${typeof 0} got: ${typeof state}`;
@@ -225,4 +227,8 @@ export function getAllStates() {
         mapAttributes.set(States[att], whichState(States[att]));
     }
     return mapAttributes;
+}
+
+export function canUpgradeState(integer) {
+    return integer >= 0 && integer < States.FINISHED;
 }
