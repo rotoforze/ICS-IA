@@ -7,7 +7,7 @@ export const ProjectDetailsPage = () => {
   const { projectid } = useParams();
   const navigate = useNavigate();
 
-  const { getProjectFromID, getTasksFromProjectId, removeProjectFromID, getNextTaskID, addTask } = useProjects();
+  const { getProjectFromID, getTasksFromProjectId, removeProjectFromID, removeTaskFromID } = useProjects();
   const project = getProjectFromID(projectid)[0];
 
   if (!project) return (<h2>No existe el projecto con ID {projectid}</h2>);
@@ -28,17 +28,19 @@ export const ProjectDetailsPage = () => {
       </div>
       <h3>Tareas</h3>
       <ul>
-        {tasks.map((task) => (
+        {tasks.length > 0 ? tasks.map((task) => (
           <li key={task.id}>
             <h4>{task.title}</h4>
             <p>{task.description}</p>
             <em>{whichState(Number.parseInt(task.state))}</em>
             <div className='actions'>
               <button>Siguiente estado</button>
-              <button>Eliminar tarea</button>
+              <button onDoubleClick={() => {
+                if (removeTaskFromID(task.id)) navigate('/projects/'+project.id);
+              }} title='Doble clikc para eliminar'>Eliminar tarea</button>
             </div>
           </li>
-        ))}
+        )): <h4>No hay tareas asignadas a este projecto.</h4>}
       </ul>
     </div>
   )

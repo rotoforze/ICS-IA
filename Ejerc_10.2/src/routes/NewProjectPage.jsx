@@ -88,9 +88,6 @@ export const NewProjectPage = () => {
           <div>
             <label htmlFor="state">Estado incial</label>
             <select name="state" id="state">
-              <option value={-1}>
-                ------------------
-              </option>
               {states}
             </select>
           </div>

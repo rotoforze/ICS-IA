@@ -106,13 +106,27 @@ export function ProjectProvider({ children }) {
         return -1;
     }
 
+    /**
+     * Si la task no existe, devuelve false. Devuelve true si ha podido eliminar la task.
+     * 
+     * @param {Number} taskId 
+     * @returns Boolean
+     */
+    const removeTaskFromID = (taskId) => {
+        const newListTasks = structuredClone(listaTasks).filter(task => task.id != taskId);
+        if (newListTasks == listaTasks) return false;
+        setListaTasks(newListTasks);
+        return true;
+    }
+
+
     const getTasksFromProjectId = (projectId) => {
         return listaTasks.filter(task => task.projectId == projectId);
     }
 
     return (
         <ProjectContext.Provider
-            value={{ listaProjects, setListaProjects, addProject, getProjectFromID, removeProjectFromID, listaTasks, setListaTasks, getNextTaskID, addTask, getTasksFromProjectId }} >
+            value={{ listaProjects, setListaProjects, addProject, getProjectFromID, removeProjectFromID, listaTasks, setListaTasks, getNextTaskID, addTask, getTasksFromProjectId, removeTaskFromID }} >
             {children}
         </ProjectContext.Provider>
     );
